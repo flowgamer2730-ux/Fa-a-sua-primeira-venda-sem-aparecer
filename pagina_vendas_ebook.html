@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Página de vendas de e-book — design premium, direto e focado em conversão.">
+<title>Comece a ganhar dinheiro sem aparecer na internet</title>
+
+<style>
+:root{
+  --bg:#030503;
+  --bg2:#071008;
+  --card:#0b130d;
+  --card2:#0f1b11;
+  --text:#f5f8f3;
+  --muted:#9ca79d;
+  --green:#b8ff00;
+  --green2:#55ff31;
+  --line:rgba(184,255,0,.18);
+  --shadow:0 25px 80px rgba(0,0,0,.45);
+  --radius:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(circle at 50% 8%,rgba(75,255,35,.10),transparent 27%),
+    radial-gradient(circle at 10% 55%,rgba(184,255,0,.045),transparent 25%),
+    var(--bg);
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+a{color:inherit;text-decoration:none}
+.container{width:min(1120px,calc(100% - 40px));margin:auto}
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:40;
+  background:rgba(3,5,3,.72);backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:900;letter-spacing:.18em;font-size:13px}
+.logo span{color:var(--green)}
+.nav-links{display:flex;gap:28px;color:#b8c0b8;font-size:13px}
+.nav-links a:hover{color:var(--green)}
+.nav-btn{
+  padding:11px 17px;border:1px solid var(--line);border-radius:999px;
+  color:var(--green);font-weight:800;font-size:12px;
+}
+.hero{position:relative;padding:145px 0 80px;min-height:820px;display:grid;align-items:center}
+.hero:after{
+  content:"";position:absolute;width:700px;height:500px;right:-280px;top:120px;
+  background:radial-gradient(circle,rgba(86,255,48,.16),transparent 68%);
+  filter:blur(15px);pointer-events:none;
+}
+.grid-bg{
+  position:absolute;inset:0;opacity:.16;pointer-events:none;
+  background-image:linear-gradient(rgba(184,255,0,.08) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(184,255,0,.08) 1px,transparent 1px);
+  background-size:70px 70px;
+  mask-image:linear-gradient(to bottom,black,transparent 85%);
+}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center;position:relative;z-index:2}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(184,255,0,.045);
+  color:var(--green);font-size:11px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;
+}
+.dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 15px var(--green)}
+h1{
+  font-size:clamp(45px,6vw,78px);line-height:.94;letter-spacing:-.055em;
+  margin:24px 0 22px;max-width:760px;
+}
+h1 .accent{color:var(--green);text-shadow:0 0 30px rgba(184,255,0,.22)}
+.hero-copy{font-size:18px;line-height:1.65;color:#b0bab1;max-width:610px}
+.hero-copy strong{color:white}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin:30px 0 22px}
+.btn{
+  border:0;cursor:pointer;padding:16px 25px;border-radius:12px;
+  font-weight:950;font-size:14px;transition:.25s;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-primary{background:var(--green);color:#061006;box-shadow:0 0 35px rgba(184,255,0,.16)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(184,255,0,.28)}
+.btn-ghost{border:1px solid rgba(255,255,255,.12);background:#0b100c;color:white}
+.btn-ghost:hover{border-color:var(--line);color:var(--green)}
+.micro{color:#7f8a81;font-size:11px}
+.proof{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px}
+.proof strong{display:block;font-size:19px}.proof span{font-size:11px;color:#778178}
+.book-wrap{position:relative;display:flex;justify-content:center;align-items:center;min-height:560px}
+.glow{position:absolute;width:430px;height:430px;background:var(--green);filter:blur(115px);opacity:.13;border-radius:50%}
+.book{
+  width:min(360px,76vw);aspect-ratio: .69;position:relative;z-index:2;
+  border-radius:10px 18px 18px 10px;
+  background:
+    radial-gradient(circle at 75% 20%,rgba(184,255,0,.38),transparent 25%),
+    linear-gradient(145deg,#101d11,#050a06 70%);
+  border:1px solid rgba(184,255,0,.34);
+  box-shadow:-25px 30px 0 rgba(0,0,0,.32),0 35px 90px rgba(0,0,0,.75),0 0 70px rgba(126,255,0,.12);
+  transform:rotate(5deg);
+  padding:34px 30px;
+  display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;
+}
+.book:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.08) 48%,transparent 58%);transform:translateX(-100%);animation:shine 5s infinite}
+@keyframes shine{55%,100%{transform:translateX(100%)}}
+.book-top{font-size:10px;letter-spacing:.22em;color:var(--green);font-weight:900}
+.book h2{font-size:42px;line-height:.9;letter-spacing:-.06em}
+.book h2 span{color:var(--green)}
+.book p{color:#9eaaa0;font-size:12px;line-height:1.5;max-width:230px}
+.book-badge{display:inline-block;width:max-content;padding:8px 11px;background:var(--green);color:#081008;font-size:9px;font-weight:950;border-radius:5px}
+.floating{
+  position:absolute;z-index:3;background:rgba(10,18,11,.9);border:1px solid var(--line);
+  backdrop-filter:blur(12px);border-radius:13px;padding:13px 15px;box-shadow:var(--shadow);
+  font-size:11px;animation:float 4s ease-in-out infinite;
+}
+.floating strong{color:var(--green);font-size:16px;display:block}
+.f1{right:0;top:90px}.f2{left:0;bottom:95px;animation-delay:1.3s}
+@keyframes float{50%{transform:translateY(-9px)}}
+.section{padding:95px 0;position:relative}
+.section-head{text-align:center;max-width:700px;margin:0 auto 48px}
+.kicker{color:var(--green);font-size:11px;letter-spacing:.2em;font-weight:900;text-transform:uppercase}
+h2.section-title{font-size:clamp(32px,4.5vw,54px);letter-spacing:-.045em;line-height:1;margin:12px 0 15px}
+.section-head p{color:var(--muted);line-height:1.7}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{
+  padding:27px;border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);
+  background:linear-gradient(145deg,rgba(14,24,15,.95),rgba(7,11,8,.95));box-shadow:var(--shadow);
+}
+.card:hover{border-color:var(--line);transform:translateY(-4px);transition:.25s}
+.icon{
+  width:44px;height:44px;border-radius:12px;background:rgba(184,255,0,.07);
+  border:1px solid var(--line);display:grid;place-items:center;color:var(--green);font-size:20px;margin-bottom:22px
+}
+.card h3{font-size:17px;margin-bottom:10px}.card p{color:#8f9a91;font-size:13px;line-height:1.65}
+.stats{
+  margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);
+  border:1px solid rgba(255,255,255,.07);border-radius:18px;overflow:hidden;background:#080d09
+}
+.stat{padding:28px;text-align:center;border-right:1px solid rgba(255,255,255,.06)}
+.stat:last-child{border:0}.stat strong{font-size:29px;color:var(--green)}.stat span{display:block;color:#788278;font-size:11px;margin-top:5px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}
+.list{display:grid;gap:14px;margin-top:26px}
+.list-item{display:flex;gap:14px;align-items:flex-start;padding:17px;border:1px solid rgba(255,255,255,.06);border-radius:15px;background:#080d09}
+.check{width:23px;height:23px;flex:none;border-radius:50%;background:var(--green);color:#071007;display:grid;place-items:center;font-size:12px;font-weight:900}
+.list-item strong{font-size:14px}.list-item p{color:#818c83;font-size:12px;margin-top:4px;line-height:1.5}
+.dashboard{
+  border:1px solid rgba(184,255,0,.2);border-radius:24px;background:#070c08;padding:18px;
+  box-shadow:0 30px 90px rgba(0,0,0,.5);position:relative;overflow:hidden
+}
+.dashboard:before{content:"";position:absolute;width:250px;height:250px;background:var(--green);filter:blur(100px);opacity:.09;right:-100px;top:-100px}
+.d-top{display:flex;justify-content:space-between;align-items:center;padding:4px 5px 18px;color:#8a958b;font-size:11px}
+.live{color:var(--green);display:flex;gap:7px;align-items:center}
+.live i{width:6px;height:6px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green)}
+.chart{height:280px;border-radius:16px;background:
+  linear-gradient(rgba(184,255,0,.055) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(184,255,0,.055) 1px,transparent 1px),#091009;
+  background-size:40px 40px;position:relative;overflow:hidden;padding:20px;
+}
+.chart svg{width:100%;height:100%}.chart-label{position:absolute;left:20px;top:18px;color:#768176;font-size:10px}
+.offer{
+  margin-top:30px;border:1px solid var(--line);border-radius:28px;padding:45px;
+  background:
+    radial-gradient(circle at 85% 10%,rgba(184,255,0,.12),transparent 30%),
+    linear-gradient(145deg,#0b160d,#050805);
+  display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;
+}
+.price-old{text-decoration:line-through;color:#687269;font-size:14px}.price{font-size:58px;letter-spacing:-.06em;font-weight:950;color:var(--green);margin:3px 0 6px}
+.offer small{color:#7f897f;font-size:11px}
+.price-box{border:1px solid rgba(184,255,0,.2);border-radius:20px;padding:25px;background:rgba(0,0,0,.18)}
+.price-box ul{list-style:none;display:grid;gap:11px;margin:18px 0}.price-box li{font-size:12px;color:#c4ccc4}.price-box li:before{content:"✓";color:var(--green);font-weight:900;margin-right:8px}
+.timer{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:18px
+}
+.time{background:#050805;border:1px solid rgba(255,255,255,.06);border-radius:9px;padding:10px;text-align:center}
+.time strong{font-size:19px;display:block}.time span{font-size:8px;color:#6e796f;text-transform:uppercase}
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.quote{font-size:13px;line-height:1.7;color:#b3bcb4;margin-bottom:18px}.person{font-size:11px;color:#758076}.person b{color:white;display:block;font-size:12px}
+.faq{max-width:800px;margin:auto;display:grid;gap:10px}
+details{background:#080d09;border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px 22px}
+summary{cursor:pointer;font-weight:800;font-size:14px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";float:right;color:var(--green);font-size:20px}
+details[open] summary:after{content:"−"}
+details p{color:#879188;font-size:12px;line-height:1.7;padding-top:14px;max-width:90%}
+.footer{padding:45px 0 100px;border-top:1px solid rgba(255,255,255,.06);text-align:center;color:#667067;font-size:11px}
+.reveal{opacity:0;transform:translateY(25px);transition:.7s ease}.reveal.show{opacity:1;transform:none}
+.mobile-cta{display:none}
+@media(max-width:850px){
+  .nav-links{display:none}.nav-btn{padding:9px 12px}
+  .hero{padding-top:120px}.hero-grid,.split,.offer{grid-template-columns:1fr}
+  .book-wrap{min-height:480px}.f1{right:2%}.f2{left:2%}
+  .features,.testimonials{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.06)}
+  .offer{padding:28px}.price{font-size:48px}
+}
+@media(max-width:520px){
+  .container{width:min(100% - 26px,1120px)}
+  h1{font-size:47px}.hero-copy{font-size:15px}
+  .cta-row{display:grid}.btn{width:100%}
+  .book-wrap{min-height:410px}.book{width:270px}
+  .floating{font-size:9px}.floating strong{font-size:13px}
+  .f1{top:30px}.f2{bottom:45px}
+  .stats{grid-template-columns:1fr 1fr}.stat{padding:20px 10px}
+  .stat strong{font-size:23px}.offer{gap:20px}
+  .mobile-cta{display:block;position:fixed;bottom:12px;left:12px;right:12px;z-index:45}
+  .mobile-cta .btn{box-shadow:0 10px 40px rgba(0,0,0,.7)}
+}
+</style>
+</head>
+
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo">GANHE<span> SEM APARECER</span></a>
+    <div class="nav-links">
+      <a href="#beneficios">Benefícios</a>
+      <a href="#conteudo">Conteúdo</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#faq">Dúvidas</a>
+    </div>
+    <a class="nav-btn" href="#oferta">QUERO O E-BOOK →</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="grid-bg"></div>
+  <div class="container hero-grid">
+    <div class="reveal">
+      <div class="eyebrow"><i class="dot"></i> E-BOOK DIGITAL • ACESSO IMEDIATO</div>
+      <h1>Aprenda a <span class="accent">ganhar dinheiro na internet</span> sem precisar aparecer.</h1>
+      <p class="hero-copy">
+        Um guia prático para quem quer sair da teoria e começar a <strong>aplicar estratégias de verdade</strong>.
+        Comece do zero ao ponto, visual e pensado para gerar resultado.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#oferta">QUERO COMEÇAR AGORA →</a>
+        <a class="btn btn-ghost" href="#conteudo">VER O QUE VOU RECEBER</a>
+      </div>
+      <div class="micro">🔒 Compra segura • 📩 Entrega automática • ⚡ Acesso imediato</div>
+      <div class="proof">
+        <div><strong>100%</strong><span>digital</span></div>
+        <div><strong>24h</strong><span>acesso imediato</span></div>
+        <div><strong>0%</strong><span>necessidade de aparecer</span></div>
+      </div>
+    </div>
+
+    <div class="book-wrap reveal">
+      <div class="glow"></div>
+      <div class="floating f1"><strong>+2.500</strong>conteúdo 100% digital</div>
+      <div class="book">
+        <div class="book-top">GUIA PRÁTICO • DIGITAL</div>
+        <div>
+          <h2>GANHE DINHEIRO<br><span>SEM APARECER</span></h2>
+          <p>Estratégias práticas para começar a criar renda pela internet sem precisar mostrar o rosto.</p>
+        </div>
+        <div>
+          <span class="book-badge">EDIÇÃO DIGITAL</span>
+          <div style="height:28px"></div>
+          <small style="color:#657066;font-size:9px">COMECE NO DIGITAL</small>
+        </div>
+      </div>
+      <div class="floating f2"><strong>ACESSO IMEDIATO</strong>receba assim que comprar</div>
+    </div>
+  </div>
+</header>
+
+<section id="beneficios" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">POR QUE ESTE E-BOOK?</div>
+      <h2 class="section-title">Menos enrolação.<br><span style="color:var(--green)">Mais aplicação.</span></h2>
+      <p>Descubra caminhos práticos para trabalhar pela internet com mais privacidade, usando estratégias que não dependem da exposição pessoal.</p>
+    </div>
+    <div class="features">
+      <article class="card reveal"><div class="icon">↗</div><h3>Estratégias sem aparecer</h3><p>Aprenda formas de trabalhar no digital sem precisar gravar vídeos, mostrar o rosto ou construir uma imagem pública.</p></article>
+      <article class="card reveal"><div class="icon">✦</div><h3>Comece do zero</h3><p>Um caminho organizado para quem ainda não sabe por onde começar e quer entender as possibilidades do mercado digital.</p></article>
+      <article class="card reveal"><div class="icon">⚡</div><h3>Método prático</h3><p>Veja como transformar o que você aprende em ações concretas para buscar suas primeiras oportunidades de renda online.</p></article>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><strong>100%</strong><span>DIGITAL</span></div>
+      <div class="stat"><strong>24/7</strong><span>ACESSO</span></div>
+      <div class="stat"><strong>0</strong><span>EXPOSIÇÃO NECESSÁRIA</span></div>
+      <div class="stat"><strong>1</strong><span>PASSO DE CADA VEZ</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="conteudo" class="section" style="background:linear-gradient(180deg,transparent,rgba(184,255,0,.025),transparent)">
+  <div class="container split">
+    <div class="reveal">
+      <div class="kicker">O QUE VOCÊ VAI ENCONTRAR</div>
+      <h2 class="section-title">Descubra como começar <span style="color:var(--green)">sem aparecer.</span></h2>
+      <p style="color:var(--muted);line-height:1.7">Você vai entender possibilidades reais para começar no digital preservando sua privacidade e construindo uma rotina de execução.</p>
+      <div class="list">
+        <div class="list-item"><div class="check">✓</div><div><strong>Como começar sem mostrar o rosto</strong><p>Entenda as possibilidades para trabalhar pela internet sem depender da sua imagem pessoal.</p></div></div>
+        <div class="list-item"><div class="check">✓</div><div><strong>Formas de monetizar no digital</strong><p>Conheça estratégias e modelos que podem ser usados para buscar renda online.</p></div></div>
+        <div class="list-item"><div class="check">✓</div><div><strong>Como evitar os erros de quem está começando</strong><p>Saiba o que evitar para não perder tempo tentando caminhos que não combinam com o seu objetivo.</p></div></div>
+        <div class="list-item"><div class="check">✓</div><div><strong>Plano para colocar em prática</strong><p>Organize suas primeiras ações e comece a testar as estratégias aprendidas.</p></div></div>
+      </div>
+    </div>
+
+    <div class="dashboard reveal">
+      <div class="d-top"><span>SEU CAMINHO</span><span class="live"><i></i> ATIVO</span></div>
+      <div class="chart">
+        <span class="chart-label">PROGRESSO</span>
+        <svg viewBox="0 0 500 220" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="area" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0" stop-color="#b8ff00" stop-opacity=".25"/>
+              <stop offset="1" stop-color="#b8ff00" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path d="M0 190 C60 180 65 145 115 155 C165 166 165 115 220 130 C275 145 280 72 330 94 C380 116 400 42 500 20 L500 220 L0 220 Z" fill="url(#area)"/>
+          <path d="M0 190 C60 180 65 145 115 155 C165 166 165 115 220 130 C275 145 280 72 330 94 C380 116 400 42 500 20" fill="none" stroke="#b8ff00" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+        <div class="card" style="padding:17px"><small style="color:#707b71">PASSO</small><strong style="display:block;font-size:25px;margin-top:5px">COMEÇO → AÇÃO</strong></div>
+        <div class="card" style="padding:17px"><small style="color:#707b71">PROGRESSO</small><strong style="display:block;font-size:25px;margin-top:5px;color:var(--green)">100%</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="oferta" class="section">
+  <div class="container">
+    <div class="offer reveal">
+      <div>
+        <div class="kicker">COMECE HOJE</div>
+        <h2 class="section-title">Seu próximo passo<br><span style="color:var(--green)">começa aqui.</span></h2>
+        <p style="color:var(--muted);line-height:1.7;max-width:560px">Você não precisa aparecer para começar. Tenha o material em mãos, escolha uma estratégia e dê o primeiro passo hoje.</p>
+        <div class="timer" aria-label="Contagem regressiva">
+          <div class="time"><strong id="days">00</strong><span>dias</span></div>
+          <div class="time"><strong id="hours">00</strong><span>horas</span></div>
+          <div class="time"><strong id="mins">00</strong><span>min</span></div>
+          <div class="time"><strong id="secs">00</strong><span>seg</span></div>
+        </div>
+      </div>
+      <div class="price-box">
+        <span class="price-old">De R$ 49,90</span>
+        <div class="price">R$ 25,50</div>
+        <small>pagamento único • acesso vitalício</small>
+        <ul>
+          <li>E-book completo em PDF</li>
+          <li>Conteúdo prático e direto</li>
+          <li>Acesso ao material digital</li>
+          <li>Acesso após a confirmação da compra</li>
+        </ul>
+        <a class="btn btn-primary" style="width:100%" href="https://pay.kiwify.com.br/hgHyY2U" target="_blank" rel="noopener">QUERO MEU E-BOOK AGORA →</a>
+        <div style="text-align:center;margin-top:12px;color:#626d64;font-size:9px">🔒 Você será direcionado para um checkout seguro.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="depoimentos" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">FEITO PARA QUEM QUER PRIVACIDADE</div>
+      <h2 class="section-title">Comece no digital sem colocar <span style="color:var(--green)">seu rosto em jogo.</span></h2>
+      <p>Você não precisa transformar sua vida pessoal em conteúdo para buscar oportunidades na internet. O foco aqui é estratégia, execução e constância.</p>
+    </div>
+    <div class="features">
+      <article class="card reveal"><div class="icon">◉</div><h3>Sem precisar aparecer</h3><p>Estruture sua presença digital de uma forma mais discreta, sem depender de vídeos mostrando seu rosto.</p></article>
+      <article class="card reveal"><div class="icon">⌁</div><h3>Comece com o que você tem</h3><p>Aprenda a enxergar possibilidades usando ferramentas e recursos acessíveis para quem está começando.</p></article>
+      <article class="card reveal"><div class="icon">→</div><h3>Saia da intenção para a ação</h3><p>Transforme o que você aprendeu em próximos passos claros para começar a testar suas estratégias.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="kicker">AINDA TEM DÚVIDAS?</div>
+      <h2 class="section-title">Perguntas <span style="color:var(--green)">frequentes.</span></h2>
+    </div>
+    <div class="faq">
+      <details class="reveal"><summary>Como recebo o e-book?</summary><p>Após a confirmação do pagamento, você recebe as instruções de acesso conforme o processo da Kiwify.</p></details>
+      <details class="reveal"><summary>É um produto físico?</summary><p>Não. É um e-book digital, pensado para ser acessado pelo celular, computador ou tablet.</p></details>
+      <details class="reveal"><summary>Por quanto tempo terei acesso?</summary><p>O acesso é feito de forma digital após a confirmação da compra.</p></details>
+      <details class="reveal"><summary>Posso pedir reembolso?</summary><p>As condições de garantia e reembolso são apresentadas no checkout no momento da compra.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">© <span id="year"></span> COMECE A GANHAR DINHEIRO SEM APARECER • Todos os direitos reservados.</div>
+</footer>
+
+<div class="mobile-cta"><a class="btn btn-primary" href="#oferta">QUERO O E-BOOK →</a></div>
+
+<script>
+/* ===== ANIMAÇÕES DE ENTRADA ===== */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) entry.target.classList.add('show');
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ===== ANO AUTOMÁTICO ===== */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ===== CONTADOR =====
+   Contador de 48h iniciado na primeira visita. */
+const key = 'ebook_countdown_v1';
+let end = localStorage.getItem(key);
+if(!end || Number(end) < Date.now()){
+  end = Date.now() + 48*60*60*1000;
+  localStorage.setItem(key,end);
+}
+function updateTimer(){
+  let diff = Math.max(0, Number(end)-Date.now());
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor(diff%86400000/3600000);
+  const m=Math.floor(diff%3600000/60000);
+  const s=Math.floor(diff%60000/1000);
+  document.getElementById('days').textContent=String(d).padStart(2,'0');
+  document.getElementById('hours').textContent=String(h).padStart(2,'0');
+  document.getElementById('mins').textContent=String(m).padStart(2,'0');
+  document.getElementById('secs').textContent=String(s).padStart(2,'0');
+}
+updateTimer(); setInterval(updateTimer,1000);
+
+/* ===== CHECKOUT =====
+   Link de compra configurado para a Kiwify. */
+</script>
+</body>
+</html>
